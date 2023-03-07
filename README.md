@@ -1,1 +1,1 @@
-ChatGPT with model davinci
+ChatGPT discord BOT
