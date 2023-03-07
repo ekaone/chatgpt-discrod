@@ -27,17 +27,19 @@ client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
 
     const gptResponse = await openai.createCompletion({
-      model: "davinci",
-      prompt: `ChatGPT is AI friendly engine \n\
-        ChatGPT: Hello, how are you?\n\
-        ${message.author.username}: ${message.content} \n\
-        ChatGPT:`,
-      max_tokens: 100,
+      model: "text-davinci-003",
+      prompt: message.content,
+      max_tokens: 1000,
       temperature: 0.9,
-      stop: ["ChatGPT:", "Eka Prasetia"],
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
+      top_p: 1.0,
+      stop: ["Eka Prasetia"],
     });
-    //console.log(message.content);
+
+    //console.log(`${gptResponse.data}`);
     message.reply(`${gptResponse.data.choices[0].text}`);
+    return;
   } catch (err) {
     console.log(err);
   }
